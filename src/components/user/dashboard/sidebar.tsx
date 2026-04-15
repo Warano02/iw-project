@@ -61,9 +61,9 @@ const collectionIcons: Record<string, React.ElementType> = {
 };
 
 const navItems = [
-  { icon: Star, label: "Favorites", href: "/favorites" },
-  { icon: Archive, label: "Archive", href: "/archive" },
-  { icon: Trash2, label: "Trash", href: "/trash" },
+  { icon: Star, label: "Favorites", href: "/user/favorites" },
+  { icon: Archive, label: "Archive", href: "/user/archive" },
+  { icon: Trash2, label: "Trash", href: "/user/trash" },
 ];
 
 export function BookmarksSidebar({
@@ -185,7 +185,7 @@ export function BookmarksSidebar({
                       <SidebarMenuButton
                         asChild
                         isActive={isActive}
-                        className="h-[38px]"
+                        className="h-9.5"
                       >
                         <Link
                           href="/"
@@ -269,7 +269,7 @@ export function BookmarksSidebar({
                   <SidebarMenuButton
                     asChild
                     isActive={pathname === item.href}
-                    className="h-[38px]"
+                    className="h-9.5"
                   >
                     <Link href={item.href}>
                       <item.icon className="size-5" />
@@ -283,17 +283,7 @@ export function BookmarksSidebar({
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="px-5 pb-5">
-        <Link
-          href="https://github.com/ln-dev7/square-ui"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-2 h-9 px-4 rounded-md border border-border bg-background hover:bg-muted shadow-xs text-sm font-medium w-full"
-        >
-          <Globe className="size-4" />
-          square.lndevui.com
-        </Link>
-      </SidebarFooter>
+     
     </Sidebar>
   );
 }
