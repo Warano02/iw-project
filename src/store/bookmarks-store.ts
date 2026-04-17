@@ -22,12 +22,12 @@ interface BookmarksState {
   setViewMode: (mode: ViewMode) => void;
   setSortBy: (sort: SortBy) => void;
   setFilterType: (filter: FilterType) => void;
-  toggleFavorite: (bookmarkId: string) => void;
-  archiveBookmark: (bookmarkId: string) => void;
-  restoreFromArchive: (bookmarkId: string) => void;
-  trashBookmark: (bookmarkId: string) => void;
-  restoreFromTrash: (bookmarkId: string) => void;
-  permanentlyDelete: (bookmarkId: string) => void;
+  toggleFavorite: (courseId: string) => void;
+  archiveBookmark: (courseId: string) => void;
+  restoreFromArchive: (courseId: string) => void;
+  trashBookmark: (courseId: string) => void;
+  restoreFromTrash: (courseId: string) => void;
+  permanentlyDelete: (courseId: string) => void;
   getFilteredBookmarks: () => Bookmark[];
   getFavoriteBookmarks: () => Bookmark[];
   getArchivedBookmarks: () => Bookmark[];
@@ -64,58 +64,58 @@ export const useBookmarksStore = create<BookmarksState>((set, get) => ({
 
   setFilterType: (filter) => set({ filterType: filter }),
 
-  toggleFavorite: (bookmarkId) =>
+  toggleFavorite: (courseId) =>
     set((state) => ({
       bookmarks: state.bookmarks.map((bookmark) =>
-        bookmark.id === bookmarkId
+        bookmark.id === courseId
           ? { ...bookmark, isFavorite: !bookmark.isFavorite }
           : bookmark
       ),
     })),
 
-  archiveBookmark: (bookmarkId) =>
+  archiveBookmark: (courseId) =>
     set((state) => {
-      const bookmark = state.bookmarks.find((b) => b.id === bookmarkId);
+      const bookmark = state.bookmarks.find((b) => b.id === courseId);
       if (!bookmark) return state;
       return {
-        bookmarks: state.bookmarks.filter((b) => b.id !== bookmarkId),
+        bookmarks: state.bookmarks.filter((b) => b.id !== courseId),
         archivedBookmarks: [...state.archivedBookmarks, bookmark],
       };
     }),
 
-  restoreFromArchive: (bookmarkId) =>
+  restoreFromArchive: (courseId) =>
     set((state) => {
-      const bookmark = state.archivedBookmarks.find((b) => b.id === bookmarkId);
+      const bookmark = state.archivedBookmarks.find((b) => b.id === courseId);
       if (!bookmark) return state;
       return {
-        archivedBookmarks: state.archivedBookmarks.filter((b) => b.id !== bookmarkId),
+        archivedBookmarks: state.archivedBookmarks.filter((b) => b.id !== courseId),
         bookmarks: [...state.bookmarks, bookmark],
       };
     }),
 
-  trashBookmark: (bookmarkId) =>
+  trashBookmark: (courseId) =>
     set((state) => {
-      const bookmark = state.bookmarks.find((b) => b.id === bookmarkId);
+      const bookmark = state.bookmarks.find((b) => b.id === courseId);
       if (!bookmark) return state;
       return {
-        bookmarks: state.bookmarks.filter((b) => b.id !== bookmarkId),
+        bookmarks: state.bookmarks.filter((b) => b.id !== courseId),
         trashedBookmarks: [...state.trashedBookmarks, bookmark],
       };
     }),
 
-  restoreFromTrash: (bookmarkId) =>
+  restoreFromTrash: (courseId) =>
     set((state) => {
-      const bookmark = state.trashedBookmarks.find((b) => b.id === bookmarkId);
+      const bookmark = state.trashedBookmarks.find((b) => b.id === courseId);
       if (!bookmark) return state;
       return {
-        trashedBookmarks: state.trashedBookmarks.filter((b) => b.id !== bookmarkId),
+        trashedBookmarks: state.trashedBookmarks.filter((b) => b.id !== courseId),
         bookmarks: [...state.bookmarks, bookmark],
       };
     }),
 
-  permanentlyDelete: (bookmarkId) =>
+  permanentlyDelete: (courseId) =>
     set((state) => ({
-      trashedBookmarks: state.trashedBookmarks.filter((b) => b.id !== bookmarkId),
+      trashedBookmarks: state.trashedBookmarks.filter((b) => b.id !== courseId),
     })),
 
   getFilteredBookmarks: () => {

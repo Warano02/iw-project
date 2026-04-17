@@ -47,6 +47,8 @@ import {
   Tag,
   Archive,
   Trash2,
+  BookAIcon,
+  Mail,
 } from "lucide-react";
 import { useBookmarksStore } from "@/store/bookmarks-store";
 import { collections, tags } from "@/mock-data/bookmarks";
@@ -61,7 +63,9 @@ const collectionIcons: Record<string, React.ElementType> = {
 };
 
 const navItems = [
+  { icon: BookAIcon, label: "Course", href: "/user" },
   { icon: Star, label: "Favorites", href: "/user/favorites" },
+  { icon: Mail, label: "Inbox", href: "/user/inbox" },
   { icon: Archive, label: "Archive", href: "/user/archive" },
   { icon: Trash2, label: "Trash", href: "/user/trash" },
 ];
@@ -80,7 +84,7 @@ export function BookmarksSidebar({
     clearTags,
   } = useBookmarksStore();
 
-  const isHomePage = pathname === "/";
+  const isHomePage = pathname === "/user";
 
   return (
     <Sidebar collapsible="offcanvas" className="lg:border-r-0!" {...props}>
@@ -115,17 +119,6 @@ export function BookmarksSidebar({
               <DropdownMenuSeparator />
 
               <DropdownMenuItem>
-                <Plus className="size-4 mr-2" />
-                Create Workspace
-              </DropdownMenuItem>
-
-              <DropdownMenuSeparator />
-
-              <DropdownMenuItem>
-                <User className="size-4 mr-2" />
-                Account Settings
-              </DropdownMenuItem>
-              <DropdownMenuItem>
                 <Settings className="size-4 mr-2" />
                 Workspace Settings
               </DropdownMenuItem>
@@ -149,7 +142,7 @@ export function BookmarksSidebar({
         <div className="relative mb-4">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
           <Input
-            placeholder="Search Bookmarks..."
+            placeholder="Search in mboa learn..."
             className="pl-9 pr-10 h-9 bg-background"
           />
           <div className="absolute right-2 top-1/2 -translate-y-1/2 bg-muted px-1.5 py-0.5 rounded text-[11px] text-muted-foreground font-medium">
@@ -158,11 +151,29 @@ export function BookmarksSidebar({
         </div>
 
         <SidebarGroup className="p-0">
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {navItems.map((item) => (
+                <SidebarMenuItem key={item.label}>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={pathname === item.href}
+                    className="h-9.5"
+                  >
+                    <Link href={item.href}>
+                      <item.icon className="size-5" />
+                      <span>{item.label}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        {collections.length > 0 && <SidebarGroup className="p-0">
           <SidebarGroupLabel className="flex items-center gap-1.5 px-0 text-[10px] font-semibold tracking-wider text-muted-foreground">
-            <button
-              onClick={() => setCollectionsOpen(!collectionsOpen)}
-              className="flex items-center gap-1.5 cursor-pointer"
-            >
+            <button onClick={() => setCollectionsOpen(!collectionsOpen)} className="flex items-center gap-1.5 cursor-pointer" >
               <ChevronDown
                 className={cn(
                   "size-3.5 transition-transform",
@@ -210,30 +221,16 @@ export function BookmarksSidebar({
               </SidebarMenu>
             </SidebarGroupContent>
           )}
-        </SidebarGroup>
+        </SidebarGroup>}
 
-        <SidebarGroup className="p-0">
+        {tags.length > 0 && <SidebarGroup className="p-0">
           <SidebarGroupLabel className="flex items-center gap-1.5 px-0 text-[10px] font-semibold tracking-wider text-muted-foreground">
-            <button
-              onClick={() => setTagsOpen(!tagsOpen)}
-              className="flex items-center gap-1.5 cursor-pointer"
-            >
-              <ChevronDown
-                className={cn(
-                  "size-3.5 transition-transform",
-                  !tagsOpen && "-rotate-90"
-                )}
-              />
+            <button onClick={() => setTagsOpen(!tagsOpen)} className="flex items-center gap-1.5 cursor-pointer">
+              <ChevronDown className={cn("size-3.5 transition-transform", !tagsOpen && "-rotate-90")} />
               TAGS
             </button>
             {selectedTags.length > 0 && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  clearTags();
-                }}
-                className="ml-auto text-[10px] text-muted-foreground hover:text-foreground"
-              >
+              <button onClick={(e) => { e.stopPropagation(); clearTags(); }} className="ml-auto text-[10px] text-muted-foreground hover:text-foreground">
                 Clear
               </button>
             )}
@@ -259,31 +256,10 @@ export function BookmarksSidebar({
               </div>
             </SidebarGroupContent>
           )}
-        </SidebarGroup>
-
-        <SidebarGroup className="p-0">
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {navItems.map((item) => (
-                <SidebarMenuItem key={item.label}>
-                  <SidebarMenuButton
-                    asChild
-                    isActive={pathname === item.href}
-                    className="h-9.5"
-                  >
-                    <Link href={item.href}>
-                      <item.icon className="size-5" />
-                      <span>{item.label}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        </SidebarGroup>}
       </SidebarContent>
 
-     
+
     </Sidebar>
   );
 }
