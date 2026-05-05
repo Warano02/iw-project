@@ -1,5 +1,5 @@
 import type { NextConfig } from "next";
-
+// from soudays
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
@@ -16,3 +16,4 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+  
