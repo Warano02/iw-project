@@ -40,26 +40,28 @@ import {
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { folders } from "@/mock-data/creator-dashboard";
+import { usePathname } from "next/navigation";
 
 const navItems = [
-  { title: "Dashboard", icon: LayoutDashboard, href: "#" },
-  { title: "Campaigns", icon: Megaphone, href: "#", isActive: true },
-  { title: "Projects", icon: Layers, href: "#" },
-  { title: "Team", icon: Users, href: "#" },
-  { title: "Messages", icon: MessageCircle, href: "#" },
-  { title: "Wallet", icon: Wallet, href: "#" },
+  { title: "Dashboard", icon: LayoutDashboard, href: "/teacher" },
+  { title: "Classrooms", icon: Megaphone, href: "/teacher/classrooms" },
+  // { title: "Projects", icon: Layers, href: "#" },
+  // { title: "Team", icon: Users, href: "#" },
+  // { title: "Messages", icon: MessageCircle, href: "#" },
+  // { title: "Wallet", icon: Wallet, href: "#" },
 ];
 
 const bottomNavItems = [
-  { title: "Help", icon: HelpCircle, href: "#" },
+  { title: "Help", icon: HelpCircle, href: "/help" },
   { title: "Settings", icon: Settings, href: "#" },
 ];
 
 export function DashboardSidebar(
   props: React.ComponentProps<typeof Sidebar>
 ) {
+  const pathname = usePathname()
   return (
-    <Sidebar collapsible="offcanvas" className="!border-r-0" {...props}>
+    <Sidebar collapsible="offcanvas" className="border-r-0!" {...props}>
       <SidebarHeader className="px-3 py-3">
         <div className="flex items-center justify-between w-full">
           <DropdownMenu>
@@ -114,7 +116,7 @@ export function DashboardSidebar(
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
                     asChild
-                    isActive={item.isActive}
+                    isActive={pathname === item.href}
                     className="h-9"
                   >
                     <Link href={item.href}>
