@@ -3,7 +3,6 @@
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { ThemeToggle } from "@/components/theme-toggle";
 import {
   DropdownMenu,
@@ -13,19 +12,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
-import {
-  Search,
-  LayoutGrid,
-  List,
-  Plus,
-  SlidersHorizontal,
-  ArrowUpDown,
-  Github,
-  Check,
-} from "lucide-react";
+import { LayoutGrid, List, SlidersHorizontal, ArrowUpDown, Check, } from "lucide-react";
 import { useBookmarksStore } from "@/store/bookmarks-store";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 
 interface BookmarksHeaderProps {
   title?: string;
@@ -70,15 +59,7 @@ export function BookmarksHeader({ title = "Bookmarks" }: BookmarksHeaderProps) {
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="relative hidden md:block">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-            <Input
-              placeholder="Search..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-9 w-64 h-9"
-            />
-          </div>
+
 
           <div className="flex items-center border rounded-md p-0.5">
             <Button
@@ -166,25 +147,9 @@ export function BookmarksHeader({ title = "Bookmarks" }: BookmarksHeaderProps) {
               )}
             </DropdownMenuContent>
           </DropdownMenu>
-
-          <Button size="sm" className="hidden sm:flex">
-            <Plus className="size-4" />
-            Add Bookmark
-          </Button>
-
           <Separator orientation="vertical" className="h-5 hidden sm:block" />
 
           <ThemeToggle />
-
-          <Button variant="ghost" size="icon" asChild>
-            <Link
-              href="https://github.com/ln-dev7/square-ui"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Github className="size-5" />
-            </Link>
-          </Button>
         </div>
       </div>
     </header>

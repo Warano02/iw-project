@@ -70,7 +70,6 @@ const navItems = [
   { icon: Star, label: "Favorites", href: "/user/favorites" },
   { icon: Mail, label: "Inbox", href: "/user/inbox" },
   { icon: Bell, label: "Notifications", href: "/user/notifications" },
-  { icon: Archive, label: "Archive", href: "/user/archive" },
   { icon: Trash2, label: "Trash", href: "/user/trash" },
 ];
 
@@ -106,22 +105,7 @@ export function BookmarksSidebar({
               <DropdownMenuLabel className="text-muted-foreground text-xs font-medium">
                 Workspaces
               </DropdownMenuLabel>
-              {/* <DropdownMenuItem>
-                <div className="size-5 rounded-full bg-linear-to-br from-blue-400 via-indigo-500 to-violet-500 mr-2" />
-                Square UI
-                <Check className="size-4 ml-auto" />
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <div className="size-5 rounded-full bg-linear-to-br from-emerald-400 to-cyan-500 mr-2" />
-                Personal
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <div className="size-5 rounded-full bg-linear-to-br from-orange-400 to-rose-500 mr-2" />
-                Work
-              </DropdownMenuItem>
-
-              <DropdownMenuSeparator /> */}
-
+    
               <DropdownMenuItem className="cursor-pointer">
                 <Link href={"/user/settings"} className="flex gap-2">
                   <Settings className="size-4 mr-2" />
@@ -144,7 +128,6 @@ export function BookmarksSidebar({
       </SidebarHeader>
 
       <SidebarContent className="px-5 pt-5">
-        <InputSide />
 
         <SidebarGroup className="p-0">
           <SidebarGroupContent>
@@ -167,92 +150,6 @@ export function BookmarksSidebar({
           </SidebarGroupContent>
         </SidebarGroup>
 
-        {collections.length > 0 && <SidebarGroup className="p-0">
-          <SidebarGroupLabel className="flex items-center gap-1.5 px-0 text-[10px] font-semibold tracking-wider text-muted-foreground">
-            <button onClick={() => setCollectionsOpen(!collectionsOpen)} className="flex items-center gap-1.5 cursor-pointer" >
-              <ChevronDown
-                className={cn(
-                  "size-3.5 transition-transform",
-                  !collectionsOpen && "-rotate-90"
-                )}
-              />
-              COLLECTIONS
-            </button>
-          </SidebarGroupLabel>
-          {collectionsOpen && (
-            <SidebarGroupContent>
-              <SidebarMenu className="mt-2">
-                {collections.map((collection) => {
-                  const IconComponent =
-                    collectionIcons[collection.icon] || Folder;
-                  const isActive =
-                    isHomePage && selectedCollection === collection.id;
-                  return (
-                    <SidebarMenuItem key={collection.id}>
-                      <SidebarMenuButton
-                        asChild
-                        isActive={isActive}
-                        className="h-9.5"
-                      >
-                        <Link
-                          href="/"
-                          onClick={() => {
-                            setSelectedCollection(collection.id);
-                            clearTags();
-                          }}
-                        >
-                          <IconComponent className="size-5" />
-                          <span className="flex-1">{collection.name}</span>
-                          <span className="text-muted-foreground text-xs">
-                            {collection.count}
-                          </span>
-                          {isActive && (
-                            <ChevronRight className="size-4 text-muted-foreground opacity-60" />
-                          )}
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  );
-                })}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          )}
-        </SidebarGroup>}
-
-        {tags.length > 0 && <SidebarGroup className="p-0">
-          <SidebarGroupLabel className="flex items-center gap-1.5 px-0 text-[10px] font-semibold tracking-wider text-muted-foreground">
-            <button onClick={() => setTagsOpen(!tagsOpen)} className="flex items-center gap-1.5 cursor-pointer">
-              <ChevronDown className={cn("size-3.5 transition-transform", !tagsOpen && "-rotate-90")} />
-              TAGS
-            </button>
-            {selectedTags.length > 0 && (
-              <button onClick={(e) => { e.stopPropagation(); clearTags(); }} className="ml-auto text-[10px] text-muted-foreground hover:text-foreground">
-                Clear
-              </button>
-            )}
-          </SidebarGroupLabel>
-          {tagsOpen && (
-            <SidebarGroupContent>
-              <div className="flex flex-wrap gap-1.5 mt-2">
-                {tags.map((tag) => (
-                  <button
-                    key={tag.id}
-                    onClick={() => toggleTag(tag.id)}
-                    className={cn(
-                      "inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium transition-colors",
-                      selectedTags.includes(tag.id)
-                        ? "bg-primary text-primary-foreground"
-                        : tag.color
-                    )}
-                  >
-                    <Tag className="size-3" />
-                    {tag.name}
-                  </button>
-                ))}
-              </div>
-            </SidebarGroupContent>
-          )}
-        </SidebarGroup>}
       </SidebarContent>
 
 
