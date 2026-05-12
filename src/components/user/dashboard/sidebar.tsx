@@ -47,10 +47,12 @@ import {
   Tag,
   Archive,
   Trash2,
+  BookOpenCheck,
   BookAIcon,
   Mail,
   House,
   Bell,
+  BookCopy,
 } from "lucide-react";
 import { useBookmarksStore } from "@/store/bookmarks-store";
 import { collections, tags } from "@/mock-data/bookmarks";
@@ -65,12 +67,14 @@ const collectionIcons: Record<string, React.ElementType> = {
 };
 
 const navItems = [
-  { icon: BookAIcon, label: "Course", href: "/user" },
-  { icon: House, label: "Classroom", href: "/user/classroom" },
-  { icon: Star, label: "Favorites", href: "/user/favorites" },
-  { icon: Mail, label: "Inbox", href: "/user/inbox" },
-  { icon: Bell, label: "Notifications", href: "/user/notifications" },
-  { icon: Trash2, label: "Trash", href: "/user/trash" },
+  { icon: BookAIcon, label: "Course", href: "/student" },
+  { icon: BookCopy, label: "Exam", href: "/student/exam" },
+  { icon: Star, label: "Favorites", href: "/student/favorites" },
+  { icon: Mail, label: "Inbox", href: "/student/inbox" },
+  { icon: BookOpenCheck, label: "Assigment", href: "/student/assigment" },
+  { icon: Bell, label: "Notifications", href: "/student/notifications" },
+  { icon: Trash2, label: "Trash", href: "/student/trash" },
+  { icon: Settings, label: "Settings", href: "/student/settings" },
 ];
 
 export function BookmarksSidebar({
@@ -87,7 +91,7 @@ export function BookmarksSidebar({
     clearTags,
   } = useBookmarksStore();
 
-  const isHomePage = pathname === "/user";
+  const isHomePage = pathname === "/student";
 
   return (
     <Sidebar collapsible="offcanvas" className="lg:border-r-0!" {...props}>
@@ -102,18 +106,6 @@ export function BookmarksSidebar({
               <ChevronDown className="size-3 text-muted-foreground" />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="w-56">
-              <DropdownMenuLabel className="text-muted-foreground text-xs font-medium">
-                Workspaces
-              </DropdownMenuLabel>
-    
-              <DropdownMenuItem className="cursor-pointer">
-                <Link href={"/user/settings"} className="flex gap-2">
-                  <Settings className="size-4 mr-2" />
-                  Workspace Settings</Link>
-              </DropdownMenuItem>
-
-              <DropdownMenuSeparator />
-
               <DropdownMenuItem className="text-destructive">
                 <LogOut className="size-4 mr-2" />
                 Log out

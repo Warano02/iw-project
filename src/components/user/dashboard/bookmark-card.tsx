@@ -60,7 +60,7 @@ export function BookmarkCard({
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
             <h3 className="font-medium truncate">{bookmark.title}</h3>
-            {bookmarkTags.length > 0 && (
+            {/* {bookmarkTags.length > 0 && (
               <div className="hidden sm:flex items-center gap-1">
                 {bookmarkTags.slice(0, 2).map((tag) => (
                   <span
@@ -79,7 +79,7 @@ export function BookmarkCard({
                   </span>
                 )}
               </div>
-            )}
+            )} */}
           </div>
           <p className="text-sm text-muted-foreground truncate">
             {bookmark.url}
@@ -113,19 +113,9 @@ export function BookmarkCard({
                 <Copy className="size-4 mr-2" />
                 Copy URL
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Pencil className="size-4 mr-2" />
-                Edit
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Tag className="size-4 mr-2" />
-                Add Tags
-              </DropdownMenuItem>
+
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => archiveBookmark(bookmark.id)}>
-                <Archive className="size-4 mr-2" />
-                Archive
-              </DropdownMenuItem>
+            
               <DropdownMenuItem
                 className="text-destructive"
                 onClick={() => trashBookmark(bookmark.id)}
@@ -175,19 +165,8 @@ export function BookmarkCard({
               <ExternalLink className="size-4 mr-2" />
               Open in new tab
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Pencil className="size-4 mr-2" />
-              Edit
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Tag className="size-4 mr-2" />
-              Add Tags
-            </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => archiveBookmark(bookmark.id)}>
-              <Archive className="size-4 mr-2" />
-              Archive
-            </DropdownMenuItem>
+            
             <DropdownMenuItem
               className="text-destructive"
               onClick={() => trashBookmark(bookmark.id)}
@@ -222,7 +201,7 @@ export function BookmarkCard({
           <p className="text-sm text-muted-foreground line-clamp-2">
             {bookmark.description}
           </p>
-          {bookmarkTags.length > 0 && (
+          {/* {bookmarkTags.length > 0 && (
             <div className="flex flex-wrap gap-1 pt-1">
               {bookmarkTags.slice(0, 3).map((tag) => (
                 <span
@@ -241,7 +220,7 @@ export function BookmarkCard({
                 </span>
               )}
             </div>
-          )}
+          )} */}
         </div>
       </button>
     </div>

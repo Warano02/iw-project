@@ -15,16 +15,7 @@ const stats = [
     icon: Star,
     color: "bg-amber-500/10 text-amber-500",
   },
-  {
-    label: "Collections",
-    icon: FolderOpen,
-    color: "bg-violet-500/10 text-violet-500",
-  },
-  {
-    label: "Tags Used",
-    icon: Tag,
-    color: "bg-emerald-500/10 text-emerald-500",
-  },
+ 
 ];
 
 export function StatsCards() {
@@ -33,12 +24,10 @@ export function StatsCards() {
   const values = [
     bookmarks.length,
     bookmarks.filter((b) => b.isFavorite).length,
-    collections.length - 1,
-    tags.length,
   ];
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-2  gap-4">
       {stats.map((stat, index) => (
         <div
           key={stat.label}
