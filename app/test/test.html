@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="data">Loding...</div>
+
+    <input type="text" onchange="ayii()" id="ayii" />
+
+    <p id="aouu" style="font-weight: bold; margin-top: 70px"></p>
+
+    <script>
+      const i = document.getElementById("ayii");
+      if (!i) alert("ayii tes noyaux");
+      const ayii = () => {
+        console.log(i.value);
+        document.getElementById("aouu").textContent = i.value;
+      };
+    </script>
+  </body>
+</html>
