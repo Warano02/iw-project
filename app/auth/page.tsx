@@ -1,9 +1,15 @@
+import LoginForm from "@/components/auth/LoginForm"
+import { Input } from "@/components/ui/input"
+
 export const metadata={
     title:"Connexion Student"
 }
 function LoginStudent() {
   return (
-    <div>LoginStudent</div>
+        <main className="p-40">
+          <LoginForm />
+        </main>
+        
   )
 }
 

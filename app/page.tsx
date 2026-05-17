@@ -4,6 +4,7 @@ import Countdown from './Countdown'
 function page() {
   return (
     <Countdown/>
+    
   )
 }
 
